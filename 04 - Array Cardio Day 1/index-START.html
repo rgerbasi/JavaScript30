@@ -38,29 +38,75 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    // console.log(inventors);
+    const fifteen = inventors.filter((obj) => {
+      return (obj.year >= 1500 && obj.year < 1600)
+    });
+    const fifteenFromVideo = inventors.filter( function(inventor) {
+      if (inventor.year >= 1500 && inventor.year < 1600) {return true;}
+    })
+    const fifteenFromVideoClean = inventors.filter( inventor => (inventor.year >= 1500 && inventor.year < 1600))
+    
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const fullNames = inventors.map((obj) => {
+      return `${obj.first} ${obj.last}`
+    })
+    
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    const sortBirthdate = inventors.sort((obj1, obj2) => {
+      //a - b is ascending 
+      return obj1.year - obj2.year
+    })
+ 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-
+    let totalYears = inventors.reduce((total, current) => {
+      return total + (current.passed - current.year);
+    }, 0)
+    // console.table(inventors.map((inv) => (inv.passed - inv.year)))
+    // console.log(totalYears)
     // 5. Sort the inventors by years lived
+    let sortedbyYears = inventors.sort((obj1, obj2) => {
+      //a - b is ascending 
+       return (obj1.passed - obj1.year) - (obj2.passed - obj2.year)
+     })
+   
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
+    // let links = document.querySelectorAll('.mw-category a')
+    // //Node list from  the website can turn it into an array multiple ways or Array.from(nodelist)
+    // const de = [...links]
+    //               .map(link => link.textContent)
+    //               .filter(street => street.includes("de"));
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+   
+    const alphabetical = people.sort((a, b) => {
+      let aName = a.split(", ")
+      let bName = b.split(", ")
+      return aName[0].localeCompare(bName[0])
+    });
+    console.table(alphabetical)
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+   
+    
+    let dataInstances = data.reduce((instances, car) => {
+      
+      if (!instances[car]) {
+        //key doesnt exist in obj
+        instances[car] = 0;
+      } 
+        instances[car]++;
+        return instances
+    }, {})
+    console.log(dataInstances)
   </script>
 </body>
 </html>
